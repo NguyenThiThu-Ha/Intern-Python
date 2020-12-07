@@ -1,0 +1,14 @@
+import requests
+url = 'https://thien-thanh-6.myshopify.com/admin/api/2020-10/customers.json'
+response = requests.get(url=url,
+                        headers={'X-Shopify-Access-Token': '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'})
+header = [key for key in response.json()["customers"][2] if key != 'default_address' and key != 'addresses']
+data = ','.join(header)
+for customer in response.json()["customers"]:
+    row = []
+    for head in header:
+        row.append(str(customer[head]))
+    data += "\n" + ",".join(row)
+file= open('customer.csv', mode='w')
+file.write(data)
+file.close()
