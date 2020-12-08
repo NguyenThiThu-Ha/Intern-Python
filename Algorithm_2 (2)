@@ -1,0 +1,29 @@
+import math
+x = int(input('x= '))
+y = int(input('y= '))
+def step_min(x, y):
+    step_min = 0
+    while (True):
+        if x > y:
+            return step_min, x
+        elif x < y:
+            x = x * 2
+        else:
+            print('ste_min= ', step_min)
+            break
+        step_min +=1
+step_min, x = step_min(x, y)
+a=x-y
+n=math.trunc(math.log2(a))
+if (n> step_min):
+    n= step_min
+while (n>=0):
+    if (a>math.pow(2,n)):
+        k=math.trunc(a//math.pow(2,n))
+        a=a- k*math.pow(2,n)
+        step_min=step_min+k
+    elif (a==math.pow(2,n)):
+        step_min+=1
+        break
+    n=n-1
+print('ste_min= ', step_min )
